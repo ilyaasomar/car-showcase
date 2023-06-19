@@ -19,11 +19,11 @@ const SearchManufacturer = ({
             .replace(/\s+/g, "")
             .includes(query.toLocaleLowerCase().replace(/\s+/g, ""))
         );
-        console.log(filteredManufacturers);
-        
+  console.log(filteredManufacturers);
+
   return (
     <div className="search-manufacturer">
-      <Combobox>
+      <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
             <Image
@@ -60,7 +60,24 @@ const SearchManufacturer = ({
                     }
                     value={item}
                   >
-                    {item}
+                    {({ selected, active }) => (
+                      <>
+                        <span
+                          className={`block truncate ${
+                            selected ? "font-medium" : "font-normal"
+                          }`}
+                        >
+                          {item}
+                        </span>
+                        {selected ? (
+                          <span
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                              active ? "text-white" : "text-teal-600"
+                            }`}
+                          ></span>
+                        ) : null}
+                      </>
+                    )}
                   </Combobox.Option>
                 ))
               }
